@@ -65,7 +65,7 @@ export default function Profile({session}) {
                 updated_at: new Date(),
                 first_name: firstName,
                 last_name: lastName,
-            }
+            };
 
             const {error} = await supabase
                 .from('profiles')
@@ -89,7 +89,7 @@ export default function Profile({session}) {
         // e.preventDefault();
 
         try {
-            const {user} = session;
+            // const {user} = session;
             console.log('hello', post);
 
             const {error} = await supabase
@@ -141,6 +141,9 @@ export default function Profile({session}) {
                     <div key={post.id}>
                         <h3>{post.title}</h3>
                         <p>{post.recipe}</p>
+                        <button onClick={() => {navigate('/updateRecipe', {state: post})}}>
+                            Edit
+                        </button>
                         <button onClick={() => {deletePost(post)}}>
                             Delete
                         </button>

@@ -1,6 +1,7 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import {supabase} from './supabaseClient';
+import './index.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import NavigateLanding from './Pages/NavigateLanding';
@@ -8,6 +9,7 @@ import Landing from './Pages/Landing';
 import Profile from './Pages/Profile';
 import PublicRecipes from './Pages/PublicRecipes';
 import CreateRecipe from './Pages/CreateRecipe';
+import UpdateRecipe from './Pages/UpdateRecipe';
 import ErrorPage from './Pages/ErrorPage';
 
 function App() {
@@ -37,6 +39,8 @@ function App() {
           <Route path='/publicRecipes' element={<PublicRecipes />} />
 
           {!session ? <Route path='*' element={<ErrorPage />} /> : <Route path='/createRecipe' element={<CreateRecipe key={session.user.id} session={session}/>} />}
+
+          {!session ? <Route path='*' element={<ErrorPage />} /> : <Route path='/updateRecipe' element={<UpdateRecipe key={session.user.id} session={session}/>} />}
 
           {/* <Route path='/createRecipe' element={<CreateRecipe key={session.user.id} session={session}/>} /> */}
           <Route path='*' element={<ErrorPage />} />

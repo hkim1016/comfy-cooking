@@ -43,7 +43,7 @@ export default function CreateRecipe({session}) {
                     type='text'
                     placeholder='Your Recipe Title'
                     value={title}
-                    onChange={e => setTitle(e.target.value)}
+                    onChange={e => setTitle(e.target.value.trim())}
                 />
                 <label htmlFor='recipe'>Recipe</label>
                 <input
@@ -51,7 +51,7 @@ export default function CreateRecipe({session}) {
                     type='text'
                     placeholder='Your Recipe'
                     value={recipe}
-                    onChange={e => setRecipe(e.target.value)}
+                    onChange={e => setRecipe(e.target.value.trim())}
                 />
                 <button type='submit'>
                     Submit
