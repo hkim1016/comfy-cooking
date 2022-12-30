@@ -110,53 +110,68 @@ export default function Profile({session}) {
     }
 
     return (
-        <div>
-            <button onClick={() => navigate('/publicRecipes')}>GO TO RECIPES</button>
-            <button onClick={() => navigate('/createRecipe')}>CREATE RECIPE</button>
-            <div>Email: {session.user.email}</div>
-            <div>Name: {firstName} {lastName}</div>
+        <div id='profile'>
+            <nav>
+                <div>
+                <button className='btn' onClick={() => navigate('/publicRecipes')}>GO TO RECIPES</button>
+                <button className='btn' onClick={() => navigate('/createRecipe')}>CREATE RECIPE</button>
 
-            <form onSubmit={updateProfile}>
-                <label htmlFor='firstName'>First Name</label>
-                <input
-                    id='firstName'
-                    type='text'
-                    placeholder='First Name'
-                    onChange={e => setFirstName(e.target.value.trim())}
-                />
-                <label htmlFor='lastName'>Last Name</label>
-                <input
-                    id='lastName'
-                    type='text'
-                    placeholder='Last Name'
-                    onChange={e => setLastName(e.target.value.trim())}
-                />
-                <button>
-                    Update Profile
+                <button id='logout' className='btn' onClick={() => {
+                    supabase.auth.signOut();
+                    navigate('/')
+                }}>
+                    Log Out
                 </button>
-            </form>
-
-            {
-                posts.map(post => (
-                    <div key={post.id}>
-                        <h3>{post.title}</h3>
-                        <p>{post.recipe}</p>
-                        <button onClick={() => {navigate('/updateRecipe', {state: post})}}>
-                            Edit
-                        </button>
-                        <button onClick={() => {deletePost(post)}}>
-                            Delete
-                        </button>
+                </div>
+            </nav>
+            <div id='main_section'>
+                <div id='user_info'>
+                    <div id='profile_picture'>
+                        <img src='https://i.postimg.cc/Wzx40rMT/blank-avatar.png' alt='profile' />
                     </div>
-                ))
-            }
+                    <div id='profile_info'>
+                        <p>Email: {session.user.email}</p>
+                        <p>Name: {firstName} {lastName}</p>
+                    </div>
 
-            <button onClick={() => {
-                supabase.auth.signOut();
-                navigate('/')
-            }}>
-                Sign out
-            </button>
+                    {/* <form onSubmit={updateProfile}>
+                        <label htmlFor='firstName'>First Name</label>
+                        <input
+                            id='firstName'
+                            type='text'
+                            placeholder='First Name'
+                            onChange={e => setFirstName(e.target.value.trim())}
+                        />
+                        <label htmlFor='lastName'>Last Name</label>
+                        <input
+                            id='lastName'
+                            type='text'
+                            placeholder='Last Name'
+                            onChange={e => setLastName(e.target.value.trim())}
+                        />
+                        <button>
+                            Update Profile
+                        </button>
+                    </form> */}
+                </div>
+                <div id='hr'><hr></hr></div>
+                <div id='user_recipes'>
+                    {
+                        posts.map(post => (
+                            <div key={post.id}>
+                                <h3>{post.title}</h3>
+                                <p>{post.recipe}</p>
+                                <button className='btn' onClick={() => {navigate('/updateRecipe', {state: post})}}>
+                                    Edit
+                                </button>
+                                <button className='btn' onClick={() => {deletePost(post)}}>
+                                    Delete
+                                </button>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
         </div>
     )
 }
