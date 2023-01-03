@@ -8,6 +8,7 @@ export default function Profile({session}) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [posts, setPosts] = useState([]);
+    const [profilePic, setProfilePic] = useState('https://i.postimg.cc/Wzx40rMT/blank-avatar.png');
 
     useEffect(() => {
         const getPosts = async () => {
@@ -56,34 +57,34 @@ export default function Profile({session}) {
         }
     }
 
-    const updateProfile = async e => {
-        // e.preventDefault();
+    // const updateProfile = async e => {
+    //     // e.preventDefault();
 
-        try {
-            const {user} = session;
-            const updates = {
-                updated_at: new Date(),
-                first_name: firstName,
-                last_name: lastName,
-            };
+    //     try {
+    //         const {user} = session;
+    //         const updates = {
+    //             updated_at: new Date(),
+    //             first_name: firstName,
+    //             last_name: lastName,
+    //         };
 
-            const {error} = await supabase
-                .from('profiles')
-                .update(updates)
-                .eq('id', user.id)
+    //         const {error} = await supabase
+    //             .from('profiles')
+    //             .update(updates)
+    //             .eq('id', user.id)
 
-            if (error) {
-                throw error;
-            }
+    //         if (error) {
+    //             throw error;
+    //         }
 
-            setFirstName('');
-            setLastName('');
-        } catch (error) {
-            // alert(123);
-            // console.log(error);
-            alert(error.message);
-        }
-    }
+    //         setFirstName('');
+    //         setLastName('');
+    //     } catch (error) {
+    //         // alert(123);
+    //         // console.log(error);
+    //         alert(error.message);
+    //     }
+    // }
 
     const deletePost = async (post, e) => {
         // e.preventDefault();
@@ -127,11 +128,12 @@ export default function Profile({session}) {
             <div id='main_section'>
                 <div id='user_info'>
                     <div id='profile_picture'>
-                        <img src='https://i.postimg.cc/Wzx40rMT/blank-avatar.png' alt='profile' />
+                        <img src={profilePic} alt='profile' />
                     </div>
                     <div id='profile_info'>
                         <p>Email: {session.user.email}</p>
                         <p>Name: {firstName} {lastName}</p>
+                        <button id='edit_profile' onClick={() => {navigate('/updateProfile')}}>Edit Profile</button>
                     </div>
 
                     {/* <form onSubmit={updateProfile}>
@@ -158,15 +160,23 @@ export default function Profile({session}) {
                 <div id='user_recipes'>
                     {
                         posts.map(post => (
-                            <div key={post.id}>
-                                <h3>{post.title}</h3>
-                                <p>{post.recipe}</p>
-                                <button className='btn' onClick={() => {navigate('/updateRecipe', {state: post})}}>
-                                    Edit
-                                </button>
-                                <button className='btn' onClick={() => {deletePost(post)}}>
-                                    Delete
-                                </button>
+                            <div id='post' key={post.id}>
+                                <div id='recipe_image'></div>
+                                <div id='recipe_content'>
+                                    <h3>{post.title}</h3>
+                                    {/* <p>{post.recipe}</p> */}
+                                    <div id='post_btn'>
+                                        <button id='view' className='btn' onClick={() => {navigate('/viewRecipe', {state: post})}}>
+                                            View
+                                        </button>
+                                        <button id='edit' className='btn' onClick={() => {navigate('/updateRecipe', {state: post})}}>
+                                            Edit
+                                        </button>
+                                        <button id='delete' className='btn' onClick={() => {deletePost(post)}}>
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         ))
                     }

@@ -7,9 +7,11 @@ import './App.css';
 import NavigateLanding from './Pages/NavigateLanding';
 import Landing from './Pages/Landing';
 import Profile from './Pages/Profile';
+import UpdateProfile from './Pages/UpdateProfile';
 import PublicRecipes from './Pages/PublicRecipes';
 import CreateRecipe from './Pages/CreateRecipe';
 import UpdateRecipe from './Pages/UpdateRecipe';
+import ViewRecipe from './Pages/ViewRecipe';
 import ErrorPage from './Pages/ErrorPage';
 
 function App() {
@@ -36,11 +38,15 @@ function App() {
 
           {!session ? <Route path='*' element={<ErrorPage />} /> : <Route path='/profile' element={<Profile key={session.user.id} session={session}/>} />}
 
+          <Route path='/updateProfile' element={<UpdateProfile />} />
+
           <Route path='/publicRecipes' element={<PublicRecipes />} />
 
           {!session ? <Route path='*' element={<ErrorPage />} /> : <Route path='/createRecipe' element={<CreateRecipe key={session.user.id} session={session}/>} />}
 
           {!session ? <Route path='*' element={<ErrorPage />} /> : <Route path='/updateRecipe' element={<UpdateRecipe key={session.user.id} session={session}/>} />}
+
+          <Route path='/viewRecipe' element={<ViewRecipe />} />
 
           {/* <Route path='/createRecipe' element={<CreateRecipe key={session.user.id} session={session}/>} /> */}
           <Route path='*' element={<ErrorPage />} />

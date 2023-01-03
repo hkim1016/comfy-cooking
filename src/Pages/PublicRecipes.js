@@ -74,20 +74,37 @@ export default function PublicRecipes({session}) {
     // }
 
     return (
-        <div>
-            <button onClick={() => navigate('/profile')}>GO TO YOUR PROFILE</button>
-            {
-                posts.map((post, index) => (
-                    <div key={post.id}>
-                        <h3>{post.title} {post.id}</h3>
-                        <p>{post.recipe}</p>
-                        {/* <p>Likes: {post.likes}</p>
-                        <button onClick={() => {likePost(post)}}>
-                            Like
-                        </button> */}
-                    </div>
-                ))
-            }
+        <div id='public_recipes'>
+            <nav>
+                <div>
+                    <button className='btn' onClick={() => navigate('/profile')}>GO TO YOUR PROFILE</button>
+
+                    <button id='logout' className='btn' onClick={() => {
+                        supabase.auth.signOut();
+                        navigate('/')
+                    }}>
+                    Log Out
+                </button>
+                </div>
+            </nav>
+            <div id='recipes'>
+                {
+                    posts.map((post, index) => (
+                        <div id='post' key={post.id}>
+                            <div id='recipe_image'></div>
+
+                            <div id='recipe_content'>
+                            <h3>{post.title} {post.id}</h3>
+                            <p>{post.recipe}</p>
+                            {/* <p>Likes: {post.likes}</p>
+                            <button onClick={() => {likePost(post)}}>
+                                Like
+                            </button> */}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     )
 }
