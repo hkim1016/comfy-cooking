@@ -1,6 +1,7 @@
 import {supabase} from '../supabaseClient';
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
+import ViewPicture from '../Components/ViewPicture';
 
 export default function PublicRecipes({session}) {
     const navigate = useNavigate();
@@ -76,22 +77,37 @@ export default function PublicRecipes({session}) {
     return (
         <div id='public_recipes'>
             <nav>
-                <div>
-                    <button className='btn' onClick={() => navigate('/profile')}>GO TO YOUR PROFILE</button>
+                <div id="publicFirstDiv">
+                    <p id='logo' className='navbar-brand' onClick={() => {navigate('/publicRecipes')}}>COMFY COOKING</p>
+                    <form id='search-bar'>
+                            <input className='me-2' type='search' />
+                            <button>Search</button>
+                    </form>
+                    <div id='publicSecondDiv'>
+                        
+                        <button className='btn' onClick={() => navigate('/profile')}>Profile</button>
 
-                    <button id='logout' className='btn' onClick={() => {
-                        supabase.auth.signOut();
-                        navigate('/')
-                    }}>
-                    Log Out
-                </button>
+                        <button id='logout' className='btn' onClick={() => {
+                            supabase.auth.signOut();
+                            navigate('/')
+                        }}>
+                        Log Out
+                        </button>
+                    </div>
                 </div>
             </nav>
+            <div id='banner'>
+                    
+            </div>
             <div id='recipes'>
                 {
                     posts.map((post, index) => (
-                        <div id='post' key={post.id}>
-                            <div id='recipe_image'></div>
+                        <div id='post' onClick={() => {navigate('/viewRecipe')}} key={post.id}>
+                            <div id='recipe_image'>
+                                <ViewPicture
+                                    url={post.recipe_image}
+                                />
+                            </div>
 
                             <div id='recipe_content'>
                             <h3>{post.title} {post.id}</h3>

@@ -1,6 +1,7 @@
 import {supabase} from '../supabaseClient';
 import {useState, useEffect} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import UploadPicture from '../Components/UploadPicture';
 
 export default function UpdateRecipe({session}) {
     const navigate = useNavigate();
@@ -8,10 +9,12 @@ export default function UpdateRecipe({session}) {
 
     const [title, setTitle] = useState('')
     const [recipe, setRecipe] = useState('');
+    const [image_url, setImageUrl] = useState(null)
 
     useEffect(() => {
         setTitle(location.state.title);
         setRecipe(location.state.recipe);
+        setImageUrl(location.state.recipe_image);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
@@ -22,6 +25,7 @@ export default function UpdateRecipe({session}) {
             const updates = {
                 title,
                 recipe,
+                recipe_image: image_url,
             };
 
             const {error} = await supabase
@@ -32,6 +36,8 @@ export default function UpdateRecipe({session}) {
             if (error) {
                 throw error;
             }
+
+            console.log(123123123, image_url);
         } catch (error) {
             alert(error.message);
         } finally {
@@ -43,6 +49,15 @@ export default function UpdateRecipe({session}) {
         <div>
             hello this is where you update recipes
             <form onSubmit={updateRecipe}>
+                <UploadPicture
+                    url={image_url}
+                    size={150}
+                    onUpload={(url) => {
+                        setImageUrl(url)
+                        updateRecipe({ title, recipe, image_url: url })
+                    }}
+                />
+
                 <label htmlFor='title'>Title</label>
                 <input
                     id='title'

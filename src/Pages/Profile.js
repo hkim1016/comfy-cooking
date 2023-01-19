@@ -1,6 +1,7 @@
 import {supabase} from '../supabaseClient';
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
+import ViewPicture from '../Components/ViewPicture';
 
 export default function Profile({session}) {
     const navigate = useNavigate();
@@ -113,16 +114,19 @@ export default function Profile({session}) {
     return (
         <div id='profile'>
             <nav>
-                <div>
-                <button className='btn' onClick={() => navigate('/publicRecipes')}>GO TO RECIPES</button>
-                <button className='btn' onClick={() => navigate('/createRecipe')}>CREATE RECIPE</button>
+                <div id='firstDiv'>
+                    <p id='logo' className='navbar-brand' onClick={() => {navigate('/publicRecipes')}}>COMFY COOKING</p>
+                    <div id='secondDiv'>
+                        <button className='btn' onClick={() => navigate('/publicRecipes')}>View Recipes</button>
+                        <button className='btn' onClick={() => navigate('/createRecipe')}>Create Recipe</button>
 
-                <button id='logout' className='btn' onClick={() => {
-                    supabase.auth.signOut();
-                    navigate('/')
-                }}>
-                    Log Out
-                </button>
+                        <button id='logout' className='btn' onClick={() => {
+                            supabase.auth.signOut();
+                            navigate('/')
+                        }}>
+                            Log Out
+                        </button>
+                    </div>
                 </div>
             </nav>
             <div id='main_section'>
@@ -135,33 +139,24 @@ export default function Profile({session}) {
                         <p>Name: {firstName} {lastName}</p>
                         <button id='edit_profile' onClick={() => {navigate('/updateProfile')}}>Edit Profile</button>
                     </div>
-
-                    {/* <form onSubmit={updateProfile}>
-                        <label htmlFor='firstName'>First Name</label>
-                        <input
-                            id='firstName'
-                            type='text'
-                            placeholder='First Name'
-                            onChange={e => setFirstName(e.target.value.trim())}
-                        />
-                        <label htmlFor='lastName'>Last Name</label>
-                        <input
-                            id='lastName'
-                            type='text'
-                            placeholder='Last Name'
-                            onChange={e => setLastName(e.target.value.trim())}
-                        />
-                        <button>
-                            Update Profile
-                        </button>
-                    </form> */}
                 </div>
                 <div id='hr'><hr></hr></div>
                 <div id='user_recipes'>
                     {
                         posts.map(post => (
                             <div id='post' key={post.id}>
-                                <div id='recipe_image'></div>
+                                <div id='recipe_image'>
+                                    {/* <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Square_-_black_simple.svg/440px-Square_-_black_simple.svg.png' alt='white square' /> */}
+
+                                    {/* <img
+                                        src={post.recipe_image ? buildImageUrl(post.recipe_image) : 'https://place-hold.it/100'}
+                                        alt={post.recipe_image ? 'Recipe Visual' : 'No Image'}   
+                                    /> */}
+
+                                    <ViewPicture
+                                        url={post.recipe_image}
+                                    />
+                                </div>
                                 <div id='recipe_content'>
                                     <h3>{post.title}</h3>
                                     {/* <p>{post.recipe}</p> */}
