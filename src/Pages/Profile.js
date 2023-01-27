@@ -1,5 +1,5 @@
 import {supabase} from '../supabaseClient';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, React} from 'react';
 import {useNavigate} from 'react-router-dom';
 import ViewPicture from '../Components/ViewPicture';
 

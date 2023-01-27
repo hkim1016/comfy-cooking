@@ -579,6 +579,10 @@ code {
   padding-left: 1em;
 }
 
+#ingredients_input div {
+  margin-top: 1em;
+}
+
 #add_ingred {
   margin-top: 1em;
 }

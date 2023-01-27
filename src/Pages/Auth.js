@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, React} from 'react';
 import {supabase} from '../supabaseClient';
-import { updateAuthPage } from '../updateAuthPage';
+import { updateAuthPage } from '../scripts/updateAuthPage';
 
 export default function Auth() {
     const [email, setEmail] = useState(null);

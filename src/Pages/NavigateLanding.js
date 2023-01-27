@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, React} from 'react';
 import { supabase } from '../supabaseClient';
 import Auth from './Auth';
 import Profile from './Profile';

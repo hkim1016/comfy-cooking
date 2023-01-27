@@ -1,10 +1,12 @@
-import {useState} from 'react';
+import {useState, React} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {supabase} from '../supabaseClient';
 import UploadPicture from '../Components/UploadPicture';
 
 export default function CreateRecipe({session}) {
-    // const [session, setSession] = useState(null);
+
+    let index_ingred = 1;
+    let index_instruct = 1001;
     const [title, setTitle] = useState('');
     const [recipe, setRecipe] = useState('');
     const [image_url, setImageUrl] = useState(null);
@@ -35,6 +37,65 @@ export default function CreateRecipe({session}) {
         }
     }
 
+    function removeIngredient(e) {
+        e.parentElement.remove();
+    }
+
+    const addIngredient = () => {
+        const new_ingred = document.createElement('input');
+        new_ingred.setAttribute('className', 'ingredient')
+        new_ingred.setAttribute('type', 'text');
+        new_ingred.setAttribute('placeholder', 'Add new ingredient');
+        new_ingred.setAttribute('required', '');
+    
+        const new_btn = document.createElement('button');
+        new_btn.append('x');
+        new_btn.setAttribute('type', 'button');
+        new_btn.setAttribute('id', index_ingred);
+    
+        const new_div = document.createElement('div');
+        new_div.append(new_ingred);
+        new_div.append(new_btn);
+    
+        const ingred_div = document.getElementById('ingredients_input');
+        ingred_div.append(new_div);
+    }
+
+    const addInstructions = () => {
+        const new_instruct = document.createElement('textarea');
+        new_instruct.setAttribute('className', 'directions');
+        new_instruct.setAttribute('placeholder', 'Add new directions');
+        new_instruct.setAttribute('required', '');
+
+        const new_btn = document.createElement('button');
+        new_btn.append('x');
+        new_btn.setAttribute('type', 'button');
+        new_btn.setAttribute('id', index_instruct);
+
+        const new_div = document.createElement('div');
+        new_div.append(new_instruct);
+        new_div.append(new_btn);
+
+        const instruct_div = document.getElementById('instructions_input');
+        instruct_div.append(new_div);
+    }
+    
+    const addOnClickIngred = () => {
+        const btn = document.getElementById("" + index_ingred + "");
+        // btn.setAttribute('onClick', "(function(){ console.log(document.getElementById(" + '' + index + ").parentElement) })()");
+        btn.setAttribute('onClick', "(function(){ document.getElementById(" + index_ingred + ").parentElement.remove() })()");
+
+        index_ingred++;
+    }
+
+    const addOnClickInstruc = () => {
+        const btn = document.getElementById("" + index_instruct + "");
+        // btn.setAttribute('onClick', "(function(){ console.log(document.getElementById(" + '' + index + ").parentElement) })()");
+        btn.setAttribute('onClick', "(function(){ document.getElementById(" + index_instruct + ").parentElement.remove() })()");
+
+        index_instruct++;
+    }
+
     return (
         <div id='create_recipe'>
             <nav>
@@ -57,7 +118,7 @@ export default function CreateRecipe({session}) {
                 <form onSubmit={() => {createRecipe(); navigate('/profile')}}>
                     <h2>Add Your Recipe!</h2>
                     <hr></hr>
-                    <div class='pic_title_desc'>
+                    <div className='pic_title_desc'>
                         <div id='new_rec_pic'>
                             <p>Upload a Photo <br></br> (Optional)</p>
                             <UploadPicture
@@ -70,7 +131,7 @@ export default function CreateRecipe({session}) {
                             />
                         </div>
 
-                        <div class='title_desc'>
+                        <div className='title_desc'>
                             <label htmlFor='title'>Title</label>
                             <input
                                 id='title'
@@ -87,35 +148,40 @@ export default function CreateRecipe({session}) {
 
                     <hr></hr>
 
-                    <div class='ingredients'>
+                    <div className='ingredients'>
                         <p>Ingredients</p>
-                        <div>
-                            <input
-                                class='ingredient'
-                                type='text'
-                                placeholder='i.e. 2 tbsp of lemon juice'
-                                required
-                            />
-                            {/* <button>x</button> */}
+                        <div id='ingredients_input'>
+                            <div>
+                                <input
+                                    className='ingredient'
+                                    type='text'
+                                    placeholder='i.e. 2 tbsp of lemon juice'
+                                    required
+                                />
+                                <button id='0' type='button' onClick={() => removeIngredient(document.getElementById('0'))}>x</button>
+                            </div>
                         </div>
-                        <button id='add_ingred'>Add Ingredient</button>
+                        <button type='button' id='add_ingred' onClick={() => {addIngredient(); addOnClickIngred()}}>Add Ingredient</button>
                     </div>
 
                     <hr></hr>
 
-                    <div class='directions'>
+                    <div className='directions'>
                         <p>Directions</p>
-                        <div>
-                            <textarea id='directions' placeholder='i.e. Preheat oven to 275 degrees F'></textarea>
-                            {/* <button>x</button> */}
+                        <div id='instructions_input'>
+                            <div>
+                                <textarea className='directions' placeholder='i.e. Preheat oven to 275 degrees F'></textarea>
+
+                                <button id='1000' type='button' onClick={() => removeIngredient(document.getElementById('1000'))}>x</button>
+                            </div>
                         </div>
-                        <button id='add_instruc'>Add Instruction</button>
+                        <button type='button' id='add_instruc' onClick={() => {addInstructions(); addOnClickInstruc()}}>Add Instruction</button>
                     </div>
 
                     <hr></hr>
 
-                    <div class='serving_time'>
-                        <div class='servings'>
+                    <div className='serving_time'>
+                        <div className='servings'>
                             <label htmlFor='servings'>Servings (Optional)</label>
                             <input
                                 id='servings'
@@ -129,7 +195,7 @@ export default function CreateRecipe({session}) {
                             <p>Total Time</p>
                             <div id='time_days'>
                                 <input
-                                    class='total_time_input'
+                                    className='total_time_input'
                                     id='total_time_days'
                                     type='number'
                                     placeholder='0'
@@ -138,7 +204,7 @@ export default function CreateRecipe({session}) {
                             </div>
                             <div id='time_hours'>  
                                 <input
-                                    class='total_time_input'
+                                    className='total_time_input'
                                     id='total_time_hours'
                                     type='number'
                                     placeholder='0'
@@ -147,7 +213,7 @@ export default function CreateRecipe({session}) {
                             </div>
                             <div id='time_min'>
                                 <input
-                                    class='total_time_input'
+                                    className='total_time_input'
                                     id='total_time_min'
                                     type='number'
                                     placeholder='0'

@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, React} from 'react';
 import {supabase} from './supabaseClient';
 import './index.css'
 import "bootstrap/dist/css/bootstrap.min.css";

@@ -1,5 +1,5 @@
 import {supabase} from '../supabaseClient';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, React} from 'react';
 
 export default function UploadPicture({url, size, onUpload}) {
     const [avatarUrl, setAvatarUrl] = useState(null);
