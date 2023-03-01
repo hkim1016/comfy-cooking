@@ -1,12 +1,17 @@
-import {useState, React} from 'react';
+import {useState, React, Fragment} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {supabase} from '../supabaseClient';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faCircleXmark} from '@fortawesome/free-regular-svg-icons'
 import UploadPicture from '../Components/UploadPicture';
 
 export default function CreateRecipe({session}) {
+    library.add(faCircleXmark);
 
     let index_ingred = 1;
     let index_instruct = 1001;
+
     const [title, setTitle] = useState('');
     const [recipe, setRecipe] = useState('');
     const [image_url, setImageUrl] = useState(null);
@@ -49,9 +54,11 @@ export default function CreateRecipe({session}) {
         new_ingred.setAttribute('required', '');
     
         const new_btn = document.createElement('button');
-        new_btn.append('x');
         new_btn.setAttribute('type', 'button');
         new_btn.setAttribute('id', index_ingred);
+
+        const btn_div = document.createElement('div');
+        new_btn.append(btn_div);
     
         const new_div = document.createElement('div');
         new_div.append(new_ingred);
@@ -68,9 +75,11 @@ export default function CreateRecipe({session}) {
         new_instruct.setAttribute('required', '');
 
         const new_btn = document.createElement('button');
-        new_btn.append('x');
         new_btn.setAttribute('type', 'button');
         new_btn.setAttribute('id', index_instruct);
+
+        const btn_div = document.createElement('div');
+        new_btn.append(btn_div);
 
         const new_div = document.createElement('div');
         new_div.append(new_instruct);
@@ -158,7 +167,9 @@ export default function CreateRecipe({session}) {
                                     placeholder='i.e. 2 tbsp of lemon juice'
                                     required
                                 />
-                                <button id='0' type='button' onClick={() => removeIngredient(document.getElementById('0'))}>x</button>
+                                <button id='0' type='button' onClick={() => removeIngredient(document.getElementById('0'))}>
+                                    <div></div>
+                                </button>
                             </div>
                         </div>
                         <button type='button' id='add_ingred' onClick={() => {addIngredient(); addOnClickIngred()}}>Add Ingredient</button>
@@ -172,7 +183,9 @@ export default function CreateRecipe({session}) {
                             <div>
                                 <textarea className='directions' placeholder='i.e. Preheat oven to 275 degrees F'></textarea>
 
-                                <button id='1000' type='button' onClick={() => removeIngredient(document.getElementById('1000'))}>x</button>
+                                <button id='1000' type='button' onClick={() => removeIngredient(document.getElementById('1000'))}>
+                                    <div></div>
+                                </button>
                             </div>
                         </div>
                         <button type='button' id='add_instruc' onClick={() => {addInstructions(); addOnClickInstruc()}}>Add Instruction</button>
@@ -190,9 +203,8 @@ export default function CreateRecipe({session}) {
                             />
                         </div>
 
-                        
+                        <p id='total_time_title'>Total Time</p>
                         <div id='total_time'>
-                            <p>Total Time</p>
                             <div id='time_days'>
                                 <input
                                     className='total_time_input'

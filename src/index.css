@@ -511,7 +511,7 @@ code {
 }
 
 #input_recipe {
-  width: 60%;
+  width: 40em;
   height: auto;
   overflow: auto;
   margin: auto auto;
@@ -521,15 +521,18 @@ code {
   display: flex;
   justify-content: center;
   border: 1px solid #D3D3D3;
+  -webkit-box-shadow: -1px 2px 5px 6px rgba(194,194,194,1);
+-moz-box-shadow: -1px 2px 5px 6px rgba(194,194,194,1);
+box-shadow: -1px 2px 5px 6px rgba(194,194,194,1);
 }
 
 #input_recipe form {
-  width: 80%;
+  width: 90%;
   /* justify-content: ; */
 }
 
 #input_recipe form input {
-  border-radius: 0.4em;
+  /* border-radius: 0.4em; */
   border: 0.6px solid black;
 }
 
@@ -566,7 +569,7 @@ code {
   height: 8em;
   padding-left: 0.8em;
   padding-top: 0.8em;
-  border-radius: 0.4em;
+  /* border-radius: 0.4em; */
   border: 0.6px solid black;
 }
 
@@ -579,22 +582,54 @@ code {
   padding-left: 1em;
 }
 
-#ingredients_input div {
+#ingredients_input div, #instructions_input div {
   margin-top: 1em;
 }
 
-#add_ingred {
+#ingredients_input div, #instructions_input div {
+  display: flex;
+  justify-content: space-between;
+}
+
+#ingredients_input div button, #instructions_input div button {
+  background-color: transparent !important;
+  border: none;
+  border-radius: 10000em;
+  border: 0.1em solid grey;
+  height: 1.4em;
+  width: 1.4em;
+  margin: auto 0;
+  /* margin-left: 0.5em; */
+}
+
+#ingredients_input div button div, #instructions_input div button div {
+  margin: auto auto;
+  background: url('../public/images/x.png') no-repeat center center;
+  background-size: contain;
+  height: 0.6em;
+  width: 0.6em;
+  /* background-color: transparent !important; */
+  /* border: none; */
+  /* padding: 3em; */
+}
+
+#add_ingred, #add_instruc {
   margin-top: 1em;
+  background: none;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 0.4em;
 }
 
 .directions textarea {
   height: 4em;
   padding: 0.8em;
+  border-radius: 0px;
 }
 
-#add_instruc {
+/* #add_instruc {
   margin-top: 1em;
-}
+} */
 
 .serving_time input{
   height: 3em;
@@ -608,10 +643,14 @@ code {
   margin-bottom: 1em;
 }
 
+#total_time_title {
+  margin-bottom: 0;
+}
+
 #total_time {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 #total_time input {
@@ -663,3 +702,4 @@ code {
   border: 1px solid black;
   font-size: 1.2em;
 }
+
