@@ -102,7 +102,7 @@ export default function PublicRecipes({session}) {
             <div id='recipes'>
                 {
                     posts.map((post, index) => (
-                        <div id='post' onClick={() => {navigate('/viewRecipe')}} key={post.id}>
+                        <div id='post' onClick={() => {navigate('/viewRecipe', {state: post})}} key={post.id}>
                             <div id='recipe_image'>
                                 <ViewPicture
                                     url={post.recipe_image}
@@ -110,7 +110,7 @@ export default function PublicRecipes({session}) {
                             </div>
 
                             <div id='recipe_content'>
-                            <h3>{post.title} {post.id}</h3>
+                            <h3>{post.title}</h3>
                             <p>{post.recipe}</p>
                             {/* <p>Likes: {post.likes}</p>
                             <button onClick={() => {likePost(post)}}>

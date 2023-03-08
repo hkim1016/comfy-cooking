@@ -1,44 +1,66 @@
-import {useState, React, Fragment} from 'react';
+import {useState, React} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {supabase} from '../supabaseClient';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {library} from '@fortawesome/fontawesome-svg-core';
-import {faCircleXmark} from '@fortawesome/free-regular-svg-icons'
+// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+// import {library} from '@fortawesome/fontawesome-svg-core';
+// import {faCircleXmark} from '@fortawesome/free-regular-svg-icons'
 import UploadPicture from '../Components/UploadPicture';
 
 export default function CreateRecipe({session}) {
-    library.add(faCircleXmark);
+    // library.add(faCircleXmark);
 
     let index_ingred = 1;
     let index_instruct = 1001;
 
     const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [recipe, setRecipe] = useState('');
+    // const [ingredients, setIngredients] = useState([]);
+    const [servings, setServings] = useState(0);
     const [image_url, setImageUrl] = useState(null);
+
+    const ingredients = [];
+    const instructions = [];
 
     const navigate = useNavigate();
 
     const createRecipe = async () => {
-
         try {
-            const newRecipe = {
-                user_id: session.user.id,
-                title,
-                recipe,
-                recipe_image: image_url,
-            };
-
-            const {error} = await supabase
-                .from('recipes')
-                .insert([newRecipe]);
-
-            if (error) {
-                throw error;
+            const ingredInputs = document.getElementsByClassName('ingredient');
+            console.log(ingredInputs);
+            for(let i = 0; i < ingredInputs.length; i ++) {
+                if(ingredInputs[i].value !== "") {
+                    ingredients.push(ingredInputs[i].value);
+                }
             }
+            alert(ingredients);
+
+            const instrucInputs = document.getElementsByClassName('directions');
+            for(let i = 0; i < instrucInputs.length; i ++) {
+                if(instrucInputs[i].value !== "") {
+                    instructions.push(instrucInputs[i].value);
+                }
+            }
+            alert(instructions);
+
+            // const newRecipe = {
+            //     user_id: session.user.id,
+            //     title,
+            //     ingredients: ingredInputs,
+            //     recipe_image: image_url,
+            // };
+
+            // const {error} = await supabase
+            //     .from('recipes')
+            //     .insert([newRecipe]);
+
+            // if (error) {
+            //     throw error;
+            // }
         } catch (error) {
             alert(error.message);
         } finally {
-            navigate('/profile');
+            // navigate('/profile');
         }
     }
 
@@ -47,11 +69,23 @@ export default function CreateRecipe({session}) {
     }
 
     const addIngredient = () => {
+        const ingredInputs = document.getElementsByClassName('ingredient');
+        // console.log(ingredInputs.length);
+        // ingredInputs.forEach(ingred => {
+        //     console.log(ingred);
+        // });
+        for(let i = 0; i < ingredInputs.length; i ++) {
+            console.log(ingredInputs[i].value === "");
+            // console.log(' ');
+            // ingredients.push(ingredInputs)
+        }
+
         const new_ingred = document.createElement('input');
-        new_ingred.setAttribute('className', 'ingredient')
+        new_ingred.setAttribute('class', 'ingredient')
         new_ingred.setAttribute('type', 'text');
         new_ingred.setAttribute('placeholder', 'Add new ingredient');
         new_ingred.setAttribute('required', '');
+        // new_ingred.setAttribute('id', 'ingred_' + index_ingred)
     
         const new_btn = document.createElement('button');
         new_btn.setAttribute('type', 'button');
@@ -70,7 +104,7 @@ export default function CreateRecipe({session}) {
 
     const addInstructions = () => {
         const new_instruct = document.createElement('textarea');
-        new_instruct.setAttribute('className', 'directions');
+        new_instruct.setAttribute('class', 'directions');
         new_instruct.setAttribute('placeholder', 'Add new directions');
         new_instruct.setAttribute('required', '');
 
@@ -93,6 +127,9 @@ export default function CreateRecipe({session}) {
         const btn = document.getElementById("" + index_ingred + "");
         // btn.setAttribute('onClick', "(function(){ console.log(document.getElementById(" + '' + index + ").parentElement) })()");
         btn.setAttribute('onClick', "(function(){ document.getElementById(" + index_ingred + ").parentElement.remove() })()");
+
+        // const input = document.getElementById('ingred_' + index_ingred);
+        // input.setAttribute('onChange', "{e => {console.log(1)} }")
 
         index_ingred++;
     }
@@ -124,7 +161,8 @@ export default function CreateRecipe({session}) {
                 </div>
             </nav>
             <div id='input_recipe'>
-                <form onSubmit={() => {createRecipe(); navigate('/profile')}}>
+                {/* <form onSubmit={() => {createRecipe(); navigate('/profile')}}> */}
+                <form id='form123' onSubmit={() => {createRecipe()}}>
                     <h2>Add Your Recipe!</h2>
                     <hr></hr>
                     <div className='pic_title_desc'>
@@ -151,7 +189,12 @@ export default function CreateRecipe({session}) {
                                 required
                             />
                             <label htmlFor='decription'>Description (Optional)</label>
-                            <textarea id='description' placeholder='Your Recipe Description'></textarea>
+                            <textarea
+                                id='description'
+                                placeholder='Your Recipe Description'
+                                onChange={e => setDescription(e.target.value.trim())}
+                            >    
+                            </textarea>
                         </div>
                     </div>
 

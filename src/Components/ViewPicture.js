@@ -1,7 +1,7 @@
 import {supabase} from '../supabaseClient';
 import {useEffect, useState, React} from 'react';
 
-export default function ViewPicture({url}) {
+export default function ViewPicture({url, size}) {
     const [avatarUrl, setAvatarUrl] = useState(null);
 
     useEffect(() => {
@@ -26,11 +26,12 @@ export default function ViewPicture({url}) {
     }
 
     return (
-        <div id='view_pic'>
+        <div style={{ width: size }} id='view_pic'>
             <img
                 src={avatarUrl ? avatarUrl : 'https://place-hold.it/100'}
                 alt={avatarUrl ? 'Avatar' : 'No image'}
                 className="avatar image recipe_image"
+                style={{ height: size, width: size }}
             />
         </div>
     )
