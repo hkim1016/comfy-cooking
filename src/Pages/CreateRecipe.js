@@ -1,9 +1,6 @@
 import {useState, React} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {supabase} from '../supabaseClient';
-// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-// import {library} from '@fortawesome/fontawesome-svg-core';
-// import {faCircleXmark} from '@fortawesome/free-regular-svg-icons'
 import UploadPicture from '../Components/UploadPicture';
 
 export default function CreateRecipe({session}) {
@@ -14,53 +11,73 @@ export default function CreateRecipe({session}) {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [recipe, setRecipe] = useState('');
+    // const [recipe, setRecipe] = useState('');
     // const [ingredients, setIngredients] = useState([]);
     const [servings, setServings] = useState(0);
     const [image_url, setImageUrl] = useState(null);
 
     const ingredients = [];
     const instructions = [];
+    
+    let time = [];
+    // let servings = 0;
+    let publicRecipe = true;
 
     const navigate = useNavigate();
 
-    const createRecipe = async () => {
+    const createRecipe = async (e) => {
+        e.preventDefault();
         try {
             const ingredInputs = document.getElementsByClassName('ingredient');
-            console.log(ingredInputs);
             for(let i = 0; i < ingredInputs.length; i ++) {
                 if(ingredInputs[i].value !== "") {
                     ingredients.push(ingredInputs[i].value);
                 }
             }
-            alert(ingredients);
 
-            const instrucInputs = document.getElementsByClassName('directions');
+            const instrucInputs = document.getElementsByClassName('instructions');
             for(let i = 0; i < instrucInputs.length; i ++) {
                 if(instrucInputs[i].value !== "") {
                     instructions.push(instrucInputs[i].value);
                 }
             }
-            alert(instructions);
 
-            // const newRecipe = {
-            //     user_id: session.user.id,
-            //     title,
-            //     ingredients: ingredInputs,
-            //     recipe_image: image_url,
-            // };
+            // alert(document.getElementById('servings').value);
+            // alert(servings);
+            // servings = document.getElementById('servings').value;
 
-            // const {error} = await supabase
-            //     .from('recipes')
-            //     .insert([newRecipe]);
+            time = [document.getElementById('total_time_days').value, document.getElementById('total_time_hours').value, document.getElementById('total_time_min').value];
 
-            // if (error) {
-            //     throw error;
-            // }
+            if(document.getElementById('public').checked) {
+                publicRecipe = true;
+            } else {
+                publicRecipe = false;
+            }
+
+            const newRecipe = {
+                user_id: session.user.id,
+                title,
+                instructions,
+                description,
+                ingredients,
+                servings,
+                time,
+                publicRecipe,
+                recipe_image: image_url,
+            };
+
+            const {error} = await supabase
+                .from('recipes')
+                .insert([newRecipe]);
+
+            if (error) {
+                throw error;
+            }
         } catch (error) {
-            alert(error.message);
+            console.log(error);
+            alert(error);
         } finally {
-            // navigate('/profile');
+            navigate('/profile');
         }
     }
 
@@ -104,7 +121,7 @@ export default function CreateRecipe({session}) {
 
     const addInstructions = () => {
         const new_instruct = document.createElement('textarea');
-        new_instruct.setAttribute('class', 'directions');
+        new_instruct.setAttribute('class', 'instructions');
         new_instruct.setAttribute('placeholder', 'Add new directions');
         new_instruct.setAttribute('required', '');
 
@@ -162,7 +179,7 @@ export default function CreateRecipe({session}) {
             </nav>
             <div id='input_recipe'>
                 {/* <form onSubmit={() => {createRecipe(); navigate('/profile')}}> */}
-                <form id='form123' onSubmit={() => {createRecipe()}}>
+                <form id='form123' onSubmit={createRecipe}>
                     <h2>Add Your Recipe!</h2>
                     <hr></hr>
                     <div className='pic_title_desc'>
@@ -173,7 +190,7 @@ export default function CreateRecipe({session}) {
                                 size={150}
                                 onUpload={(url) => {
                                     setImageUrl(url)
-                                    createRecipe({ user_id: session.user.id, title, recipe, image_url: url })
+                                    createRecipe({ user_id: session.user.id, title, description, ingredients, instructions, time, publicRecipe, image_url: url })
                                 }}
                             />
                         </div>
@@ -184,7 +201,7 @@ export default function CreateRecipe({session}) {
                                 id='title'
                                 type='text'
                                 placeholder='Your Recipe Title'
-                                value={title}
+                                // value={title}
                                 onChange={e => setTitle(e.target.value.trim())}
                                 required
                             />
@@ -224,7 +241,7 @@ export default function CreateRecipe({session}) {
                         <p>Directions</p>
                         <div id='instructions_input'>
                             <div>
-                                <textarea className='directions' placeholder='i.e. Preheat oven to 275 degrees F'></textarea>
+                                <textarea className='instructions' placeholder='i.e. Preheat oven to 275 degrees F'></textarea>
 
                                 <button id='1000' type='button' onClick={() => removeIngredient(document.getElementById('1000'))}>
                                     <div></div>
@@ -242,11 +259,13 @@ export default function CreateRecipe({session}) {
                             <input
                                 id='servings'
                                 type='number'
-                                placeholder='i.e. 6'
+                                placeholder='0'
+                                // value='0'
+                                onChange={e => setServings(e.target.value)}
                             />
                         </div>
 
-                        <p id='total_time_title'>Total Time</p>
+                        <p id='total_time_title'>Total Time (Optional)</p>
                         <div id='total_time'>
                             <div id='time_days'>
                                 <input
@@ -287,6 +306,7 @@ export default function CreateRecipe({session}) {
                                 name='recipe_privacy'
                                 type='radio'
                                 value='public'
+                                required
                             />
                             <label htmlFor='public'>Public Recipe?</label>
                         </div>
