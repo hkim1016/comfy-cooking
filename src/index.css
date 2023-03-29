@@ -251,8 +251,8 @@ code {
 }
 
 #profile nav button {
-  border-left: 1px solid black;
-  border-right: 1px solid black;
+  /* border-left: 1px solid black;
+  border-right: 1px solid black; */
   margin: auto 1em;
 }
 
@@ -433,6 +433,8 @@ code {
 
 #search-bar input {
   margin: auto 0;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   width: 30em;
   height: 2em;
   border-radius: 0.4em;
@@ -440,8 +442,8 @@ code {
 }
 
 #public_recipes nav button {
-  border-left: 1px solid black;
-  border-right: 1px solid black;
+  /* border-left: 1px solid black;
+  border-right: 1px solid black; */
   margin: 1em;
 }
 
@@ -479,8 +481,8 @@ code {
   cursor: pointer;
 }
 
-/* For Create Recipe Page */
-#create_recipe {
+/* For Create Recipe and Update Recipe Page */
+#create_recipe, #update_recipe {
   width: 100%;
   height: auto;
   padding-bottom: 0.1em;
@@ -488,7 +490,7 @@ code {
   font-family: 'Mandali', sans-serif;
 }
 
-#create_recipe nav {
+nav {
   border-bottom: 1px solid #D3D3D3;
   position: sticky;
   top: 0;
@@ -497,7 +499,7 @@ code {
   /* padding-right: 6%; */ 
 }
 
-#create_recipe nav #firstDiv {
+nav #firstDiv {
   width: 80%;
   margin: 0 auto;
   padding: 1em 0;
@@ -505,7 +507,7 @@ code {
   justify-content: space-between;
 }
 
-#create_recipe nav button {
+nav button {
   border-left: 1px solid black;
   border-right: 1px solid black;
   margin: auto 1em;
@@ -705,3 +707,59 @@ code {
   font-size: 1.2em;
 }
 
+#cancel_edit {
+  border: 1px solid black;
+  font-size: 1.2em;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* For View Recipe Page */
+#view_recipe {
+  font-family: 'Mandali', sans-serif;
+}
+
+#view_grid {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-gap: 1em;
+}
+
+#pic_title_desc #view_pic {
+  margin: auto;
+}
+
+#pic_title_desc #view_pic img {
+  object-fit: cover;
+  height: 500px;
+  width: 500px;
+  margin: auto;
+}
+
+#pic_title_desc #view_picture {
+  /* width: 500px;
+  height: 500px; */
+  background-color: lightgray;
+}
+
+#pic_title_desc, #rec_content {
+  border: 1px solid black;
+  padding: 0.7em;
+}
+
+#view_title_desc {
+  margin-top: 2em;
+}
+
+#view_title_desc h2 {
+  margin-bottom: 1em;
+}

@@ -45,8 +45,11 @@ export default function CreateRecipe({session}) {
             // alert(document.getElementById('servings').value);
             // alert(servings);
             // servings = document.getElementById('servings').value;
+            const days = document.getElementById('total_time_days').value === '' ? 0 : document.getElementById('total_time_days').valueAsNumber;
+            const hours = document.getElementById('total_time_hours').value === '' ? 0 : document.getElementById('total_time_hours').valueAsNumber;
+            const min = document.getElementById('total_time_min').value === '' ? 0 : document.getElementById('total_time_min').valueAsNumber;
 
-            time = [document.getElementById('total_time_days').value, document.getElementById('total_time_hours').value, document.getElementById('total_time_min').value];
+            time = [days, hours, min];
 
             if(document.getElementById('public').checked) {
                 publicRecipe = true;
@@ -57,9 +60,9 @@ export default function CreateRecipe({session}) {
             const newRecipe = {
                 user_id: session.user.id,
                 title,
-                instructions,
                 description,
                 ingredients,
+                instructions,
                 servings,
                 time,
                 publicRecipe,
@@ -86,17 +89,6 @@ export default function CreateRecipe({session}) {
     }
 
     const addIngredient = () => {
-        const ingredInputs = document.getElementsByClassName('ingredient');
-        // console.log(ingredInputs.length);
-        // ingredInputs.forEach(ingred => {
-        //     console.log(ingred);
-        // });
-        for(let i = 0; i < ingredInputs.length; i ++) {
-            console.log(ingredInputs[i].value === "");
-            // console.log(' ');
-            // ingredients.push(ingredInputs)
-        }
-
         const new_ingred = document.createElement('input');
         new_ingred.setAttribute('class', 'ingredient')
         new_ingred.setAttribute('type', 'text');
@@ -166,7 +158,8 @@ export default function CreateRecipe({session}) {
                     <p id='logo' className='navbar-brand' onClick={() => {navigate('/publicRecipes')}}>COMFY COOKING</p>
                     <div id='secondDiv'>
                         <button className='btn' onClick={() => navigate('/publicRecipes')}>View Recipes</button>
-                        <button className='btn' onClick={() => navigate('/createRecipe')}>Create Recipe</button>
+                        {/* <button className='btn' onClick={() => navigate('/createRecipe')}>Create Recipe</button> */}
+                        <button className='btn' onClick={() => navigate('/profile')}>Profile</button>
 
                         <button id='logout' className='btn' onClick={() => {
                             supabase.auth.signOut();
@@ -238,7 +231,7 @@ export default function CreateRecipe({session}) {
                     <hr></hr>
 
                     <div className='directions'>
-                        <p>Directions</p>
+                        <p>Instructions</p>
                         <div id='instructions_input'>
                             <div>
                                 <textarea className='instructions' placeholder='i.e. Preheat oven to 275 degrees F'></textarea>
@@ -273,6 +266,7 @@ export default function CreateRecipe({session}) {
                                     id='total_time_days'
                                     type='number'
                                     placeholder='0'
+                                    // defaultValue='0'
                                 />
                                 <label htmlFor='total_time_days'>Days</label>
                             </div>
@@ -282,6 +276,7 @@ export default function CreateRecipe({session}) {
                                     id='total_time_hours'
                                     type='number'
                                     placeholder='0'
+                                    // defaultValue='0'
                                 />
                                 <label htmlFor='total_time_hours'>Hours</label>
                             </div>
@@ -291,6 +286,7 @@ export default function CreateRecipe({session}) {
                                     id='total_time_min'
                                     type='number'
                                     placeholder='0'
+                                    // defaultValue='0'
                                 />
                                 <label htmlFor='total_time_min'>Minutes</label>
                             </div>
@@ -323,6 +319,10 @@ export default function CreateRecipe({session}) {
 
                     <button id='submit' className='btn' type='submit'>
                         Submit
+                    </button>
+
+                    <button id='cancel_edit' className='btn' type='button' onClick={() => {navigate('/profile')}}>
+                        Cancel
                     </button>
                 </form>
             </div>

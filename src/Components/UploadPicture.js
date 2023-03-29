@@ -11,7 +11,7 @@ export default function UploadPicture({url, size, onUpload}) {
 
     const downloadImage = async (path) => {
         try {
-            console.log('path', path);
+            // console.log('path', path);
             const { data, error } = await supabase.storage.from('avatars').download(path);
 
             if (error) {
@@ -19,7 +19,7 @@ export default function UploadPicture({url, size, onUpload}) {
             }
 
             const url = URL.createObjectURL(data);
-            console.log('123', data);
+            // console.log('123', data);
             setAvatarUrl(url)
         } catch (error) {
             console.log('Error downloading image: ', error.message);

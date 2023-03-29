@@ -10,7 +10,7 @@ export default function ViewPicture({url, size}) {
 
     const downloadImage = async (path) => {
         try {
-            console.log('path', path);
+            // console.log('path', path);
             const { data, error } = await supabase.storage.from('avatars').download(path);
 
             if (error) {
@@ -18,7 +18,7 @@ export default function ViewPicture({url, size}) {
             }
 
             const url = URL.createObjectURL(data);
-            console.log('123', data);
+            // console.log('123', data);
             setAvatarUrl(url)
         } catch (error) {
             console.log('Error downloading image: ', error.message);
@@ -26,12 +26,13 @@ export default function ViewPicture({url, size}) {
     }
 
     return (
-        <div style={{ width: size }} id='view_pic'>
+        <div style={{ width: size}} id='view_pic'>
             <img
                 src={avatarUrl ? avatarUrl : 'https://place-hold.it/100'}
                 alt={avatarUrl ? 'Avatar' : 'No image'}
                 className="avatar image recipe_image"
-                style={{ height: size, width: size }}
+                // style={{ height: size, width: size }}
+                // style={{ objectFit: 'contain' }}
             />
         </div>
     )

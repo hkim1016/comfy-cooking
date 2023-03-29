@@ -79,12 +79,13 @@ export default function PublicRecipes({session}) {
             <nav>
                 <div id="publicFirstDiv">
                     <p id='logo' className='navbar-brand' onClick={() => {navigate('/publicRecipes')}}>COMFY COOKING</p>
-                    <form id='search-bar'>
+                    {/* <form id='search-bar'>
                             <input className='me-2' type='search' />
                             <button>Search</button>
-                    </form>
+                    </form> */}
                     <div id='publicSecondDiv'>
                         
+                        <button className='btn' onClick={() => navigate('/createRecipe')}>Create Recipe</button>
                         <button className='btn' onClick={() => navigate('/profile')}>Profile</button>
 
                         <button id='logout' className='btn' onClick={() => {
