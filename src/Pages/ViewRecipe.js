@@ -7,6 +7,8 @@ export default function ViewRecipe() {
     const location = useLocation();
     const navigate = useNavigate();
 
+    let step = 1;
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [ingredients, setIngredients] = useState([]);
@@ -60,25 +62,32 @@ export default function ViewRecipe() {
                     </div>
                 </div>
                 <div id='rec_content'>
-                    <h5>Servings: {servings}</h5>
-                    <h5>Time: {time[0]} Days | {time[1]} Hours | {time[2]} Minutes</h5>
+                    <h4 id='view_servings'><span style={{fontWeight: 'bold'}}>Servings:</span> {servings} | <span style={{fontWeight: 'bold'}}>Time:</span> {time[0]} Days, {time[1]} Hours, {time[2]} Minutes</h4>
 
-                    <div id='view_ingred'>
-                        <h5>Ingredients</h5>
-                        {
-                            ingredients.map((ingred, index) => (
-                                <p>{ingred}</p>
-                            ))
-                        }
-                    </div>
+                    <div id='view_ingred_instruct'>
+                        <div id='view_ingred'>
+                            <h3>Ingredients</h3>
+                            <ul>
+                            {
+                                ingredients.map((ingred, index) => (
+                                    <li>{ingred}</li>
+                                ))
+                            }
+                            <li>asdlfhasdf</li>
+                            </ul>
+                        </div>
 
-                    <div id='view_instruct'>
-                        <h5>Instructions</h5>
-                        {
-                            instructions.map((instruct, index) => (
-                                <p>{instruct}</p>
-                            ))
-                        }
+                        <div id='view_instruct'>
+                            <h3>Instructions</h3>
+                            {
+                                instructions.map((instruct, index) => (
+                                    <div>
+                                        <p className='instruct_step' style={{fontWeight: 'bold'}}>Step {step++}</p>
+                                        <p>{instruct}</p>
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
