@@ -9,7 +9,8 @@ export default function Profile({session}) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [posts, setPosts] = useState([]);
-    const [profilePic, setProfilePic] = useState('https://i.postimg.cc/Wzx40rMT/blank-avatar.png');
+    // const [profilePic, setProfilePic] = useState('https://i.postimg.cc/Wzx40rMT/blank-avatar.png');
+    const [profilePic, setProfilePic] = useState(null);
 
     useEffect(() => {
         const getPosts = async () => {
@@ -42,7 +43,7 @@ export default function Profile({session}) {
             const {user} = session;
             const {data, error} = await supabase
                 .from('profiles')
-                .select(`first_name, last_name`)
+                .select(`first_name, last_name, avatar_url`)
                 .eq('id', user.id)
                 .single();
             
@@ -52,6 +53,7 @@ export default function Profile({session}) {
 
             setFirstName(data.first_name);
             setLastName(data.last_name);
+            setProfilePic(data.avatar_url);
         } catch (error) {
             alert(error.message);
             // alert(123);
@@ -132,12 +134,15 @@ export default function Profile({session}) {
             <div id='main_section'>
                 <div id='user_info'>
                     <div id='profile_picture'>
-                        <img src={profilePic} alt='profile' />
+                        <ViewPicture
+                            url={profilePic}
+                        />
+                        {/* <img src={profilePic} alt='profile' /> */}
                     </div>
                     <div id='profile_info'>
                         <p>Email: {session.user.email}</p>
                         <p>Name: {firstName} {lastName}</p>
-                        <button id='edit_profile' onClick={() => {navigate('/updateProfile')}}>Edit Profile</button>
+                        <button id='edit_profile' onClick={() => {navigate('/updateProfile', {state: {firstName, lastName, profilePic, userId: session.user.id}})}}>Edit Profile</button>
                     </div>
                 </div>
                 <div id='hr'><hr></hr></div>
