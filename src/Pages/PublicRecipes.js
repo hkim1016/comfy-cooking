@@ -21,7 +21,8 @@ export default function PublicRecipes({session}) {
         try {
             const {data, error} = await supabase
                 .from('recipes')
-                .select();
+                .select()
+                .eq('publicRecipe', true);
             
             if (error) {
                 throw error;
@@ -109,14 +110,14 @@ export default function PublicRecipes({session}) {
                                     url={post.recipe_image}
                                 />
                             </div>
-
+                            
                             <div id='recipe_content'>
-                            <h3>{post.title}</h3>
-                            <p>{post.recipe}</p>
-                            {/* <p>Likes: {post.likes}</p>
-                            <button onClick={() => {likePost(post)}}>
-                                Like
-                            </button> */}
+                                <h3>{post.title}</h3>
+                                {/* <p>{post.description}</p> */}
+                                {/* <p>Likes: {post.likes}</p>
+                                <button onClick={() => {likePost(post)}}>
+                                    Like
+                                </button> */}
                             </div>
                         </div>
                     ))
