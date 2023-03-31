@@ -9,7 +9,67 @@ export default function Auth() {
 
     useEffect(() => {
         updateAuthPage(signUpHidden);
-    }, [signUpHidden])
+    }, [signUpHidden, password])
+
+    useEffect(() => {
+        window.onload = () => {
+            const myInput = document.getElementById("signup_pass");
+            const letter = document.getElementById("letter");
+            const capital = document.getElementById("capital");
+            const number = document.getElementById("number");
+            const length = document.getElementById("length");
+
+            myInput.onfocus = function() {
+                document.getElementById("message").style.display = "block";
+            }
+            
+            myInput.onblur = function() {
+                document.getElementById("message").style.display = "none";
+            }
+
+            myInput.onkeyup = () => {
+                // Validate lowercase letters
+                const lowerCaseLetters = /[a-z]/g;
+                if(myInput.value.match(lowerCaseLetters)) {  
+                    console.log('lowercase')
+                    letter.classList.remove("invalid");
+                    letter.classList.add("valid");
+                } else {
+                    letter.classList.remove("valid");
+                    letter.classList.add("invalid");
+                }
+                
+                // Validate capital letters
+                const upperCaseLetters = /[A-Z]/g;
+                if(myInput.value.match(upperCaseLetters)) {  
+                    capital.classList.remove("invalid");
+                    capital.classList.add("valid");
+                } else {
+                    capital.classList.remove("valid");
+                    capital.classList.add("invalid");
+                }
+              
+                // Validate numbers
+                const numbers = /[0-9]/g;
+                if(myInput.value.match(numbers)) {  
+                    number.classList.remove("invalid");
+                    number.classList.add("valid");
+                } else {
+                    number.classList.remove("valid");
+                    number.classList.add("invalid");
+                }
+                
+                // Validate length
+                if(myInput.value.length >= 8) {
+                    length.classList.remove("invalid");
+                    length.classList.add("valid");
+                } else {
+                    length.classList.remove("valid");
+                    length.classList.add("invalid");
+                }
+            }
+        }
+    })
 
     async function handleSignup(e) {
         e.preventDefault();
@@ -39,7 +99,7 @@ export default function Auth() {
     }
 
     function updateHidden() {
-        isSignUpHidden(!signUpHidden)
+        isSignUpHidden(!signUpHidden);
     }
 
     return (
@@ -66,7 +126,19 @@ export default function Auth() {
                             type='password'
                             placeholder='Your Password'
                             onChange={e => setPassword(e.target.value.trim())}
+                            pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
+                            onInvalid={e => e.target.setCustomValidity('1 Uppercase, 1 Lowercase, 1 Number, 8 Min Characters')} 
+                            onInput={e => e.target.setCustomValidity('')} 
                         />
+
+                        <div id="message">
+                            <h3>Password must contain the following:</h3>
+                            <p id="letter" className="invalid">A <b>lowercase</b> letter</p>
+                            <p id="capital" className="invalid">A <b>capital (uppercase)</b> letter</p>
+                            <p id="number" className="invalid">A <b>number</b></p>
+                            <p id="length" className="invalid">Minimum <b>8 characters</b></p>
+                        </div>
+
                         <button id='signup_submit' className='btn'>
                             Sign Up
                         </button>

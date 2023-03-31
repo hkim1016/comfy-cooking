@@ -189,6 +189,51 @@ code {
   background-size: cover;
 }
 
+#message {
+  display: none;
+  /* background: #f1f1f1; */
+  margin-top: 1em;
+  padding: 1em;
+  /* padding-top: 1em; */
+}
+
+#message h3 {
+  font-size: 1em;
+}
+
+#message p {
+  font-size: 1em;
+  font-family: 'Halant', serif;
+  margin: 0;
+  padding: 1em 1em;
+}
+
+#length {
+  padding-bottom: 0.06em !important;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -1em;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -1em;
+  content: "✖";
+}
+
 /* #signup_form {
   width: 55%;
   height: 80vh;
