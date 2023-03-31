@@ -18,6 +18,8 @@ function App() {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
+    document.title = 'Comfy Cooking';
+
     supabase.auth.getSession().then(({data: {session}}) => {
       setSession(session);
     })
