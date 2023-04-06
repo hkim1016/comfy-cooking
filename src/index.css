@@ -401,7 +401,7 @@ code {
 
 #profile_picture img {
   width: 10em;
-  height: auto;
+  height: 10em;
   border-radius: 100000em;
 }
 
