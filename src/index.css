@@ -403,7 +403,7 @@ code {
   width: 10em;
   height: 10em;
   border-radius: 100000em;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 #profile_info {
