@@ -73,7 +73,6 @@ export default function ViewRecipe() {
                                     <li>{ingred}</li>
                                 ))
                             }
-                            <li>asdlfhasdf</li>
                             </ul>
                         </div>
 
