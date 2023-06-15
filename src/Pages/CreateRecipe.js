@@ -2,6 +2,7 @@ import {useState, React} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {supabase} from '../supabaseClient';
 import UploadPicture from '../Components/UploadPicture';
+import '../style/createrecipe.css';
 
 export default function CreateRecipe({session}) {
     // library.add(faCircleXmark);

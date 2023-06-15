@@ -2,6 +2,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {useState, useEffect, React} from 'react';
 import {supabase} from './supabaseClient';
 import './index.css'
+// import './Pages/style/index.css'
+// import './style/index.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import NavigateLanding from './Pages/NavigateLanding';

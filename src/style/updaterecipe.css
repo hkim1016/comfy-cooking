@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Halant:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mandali&display=swap');
+
+#create_recipe, #update_recipe {
+    width: 100%;
+    height: auto;
+    padding-bottom: 0.1em;
+    background-color: white;
+    font-family: 'Mandali', sans-serif;
+  }
+  
+  nav {
+    border-bottom: 1px solid #D3D3D3;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+  }
+  
+  nav #firstDiv {
+    width: 80%;
+    margin: 0 auto;
+    padding: 1em 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  nav button {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    margin: auto 1em;
+  }
+  
+  #input_recipe {
+    width: 40em;
+    height: auto;
+    overflow:visible;
+    margin: auto auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #D3D3D3;
+    -webkit-box-shadow: -1px 2px 5px 6px rgba(194,194,194,1);
+    -moz-box-shadow: -1px 2px 5px 6px rgba(194,194,194,1);
+    box-shadow: -1px 2px 5px 6px rgba(194,194,194,1);
+  }
+  
+  #input_recipe form {
+    width: 90%;
+  }
+  
+  #input_recipe form input {
+    border: 0.6px solid black;
+  }
+  
+  #input_recipe form label, #input_recipe form p {
+    font-weight: bolder;
+  }
+  
+  #new_rec_pic p {
+    font-weight: bolder;
+    margin-bottom: 0;
+  }
+  
+  .pic_title_desc {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+  
+  .pic_title_desc img {
+    object-fit: cover;
+  }
+  
+  .title_desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  } 
+  
+  .title_desc label {
+    font-weight: bolder;
+  }
+  
+  .title_desc #title {
+    height: 3em;
+    padding-left: 1em;
+  }
+  
+  .title_desc #description {
+    height: 8em;
+    padding-left: 0.8em;
+    padding-top: 0.8em;
+    border: 0.6px solid black;
+  }
+  
+  .ingredients input, .directions textarea {
+    width: 90%;
+  }
+  
+  .ingredients input {
+    height: 3em;
+    padding-left: 1em;
+  }
+  
+  #ingredients_input div, #instructions_input div {
+    margin-top: 1em;
+  }
+  
+  #ingredients_input div, #instructions_input div {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #ingredients_input div button, #instructions_input div button {
+    background-color: transparent !important;
+    border: none;
+    border-radius: 10000em;
+    border: 0.1em solid grey;
+    height: 1.4em;
+    width: 1.4em;
+    margin: auto 0;
+  }
+  
+  #ingredients_input div button div, #instructions_input div button div {
+    margin: auto auto;
+    background: url('../../public/images/x.png') no-repeat center center;
+    background-size: contain;
+    height: 0.6em;
+    width: 0.6em;
+  }
+  
+  #add_ingred, #add_instruc {
+    margin-top: 1em;
+    background: none;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 0.4em;
+  }
+  
+  .directions textarea {
+    height: 4em;
+    padding: 0.8em;
+    border-radius: 0px;
+  }
+  
+  .serving_time input{
+    height: 3em;
+    padding-left: 1em;
+    width: 60%;
+  }
+  
+  .servings {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+  }
+  
+  #total_time_title {
+    margin-bottom: 0;
+  }
+  
+  #total_time {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  #total_time input {
+    margin-right: 0.3em;
+  }
+  
+  #total_time label {
+    margin: auto 0;
+  }
+  
+  #time_days, #time_hours, #time_min {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  #total_time_days, #total_time_hours {
+    margin-bottom: 1em;
+  }
+  
+  #total_time p {
+    margin-bottom: 0;
+  }
+  
+  .total_time_input {
+    height: 2em;
+  }
+  
+  #public_private {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.7em;
+  }
+  
+  #public_private label {
+    margin-left: 0.3em;
+  }
+  
+  #public_private input[type='radio'] { 
+    transform: scale(1.2); 
+  }
+  
+  #rec_public {
+    margin-bottom: 0.7em;
+  }
+  
+  #input_recipe form #submit {
+    float: right;
+    border: 1px solid black;
+    font-size: 1.2em;
+  }
+  
+  #cancel_edit {
+    border: 1px solid black;
+    font-size: 1.2em;
+  }
+  
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }

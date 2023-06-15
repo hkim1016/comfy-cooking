@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import {supabase} from '../supabaseClient';
 import ViewPicture from '../Components/ViewPicture';
+import '../style/viewrecipe.css';
 
 export default function ViewRecipe() {
     const location = useLocation();

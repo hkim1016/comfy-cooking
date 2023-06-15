@@ -2,6 +2,7 @@ import {supabase} from '../supabaseClient';
 import {useState, useEffect, React} from 'react';
 import {useNavigate} from 'react-router-dom';
 import ViewPicture from '../Components/ViewPicture';
+import '../style/profile.css';
 
 export default function Profile({session}) {
     const navigate = useNavigate();

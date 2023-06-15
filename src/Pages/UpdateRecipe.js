@@ -2,6 +2,7 @@ import {supabase} from '../supabaseClient';
 import {useState, useEffect, React} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import UploadPicture from '../Components/UploadPicture';
+import '../style/updaterecipe.css';
 
 export default function UpdateRecipe({session}) {
     let index_ingred = 1;
@@ -43,6 +44,7 @@ export default function UpdateRecipe({session}) {
         if(load < 50) {
             setLoad(load + 1);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [load])
 
     // window.onload = () => {

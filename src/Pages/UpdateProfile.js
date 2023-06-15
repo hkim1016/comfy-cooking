@@ -2,6 +2,7 @@ import {supabase} from '../supabaseClient';
 import {useEffect, useState} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import UploadPicture from '../Components/UploadPicture';
+import '../style/updateprofile.css';
 
 export default function UpdateProfile() {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ export default function UpdateProfile() {
         setLastName(location.state.lastName);
         setProfilePic(location.state.profilePic);
         console.log('aksdhflkasjhdf',location.state.userId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const updateProfile = async e => {

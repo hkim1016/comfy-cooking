@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Halant:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mandali&display=swap');
+
+#public_recipes nav {
+    border-bottom: 1px solid #D3D3D3;
+    position: sticky;
+    top: 0;
+    margin: 0 auto;
+    background-color: white;
+    z-index: 100;
+  }
+  
+  #public_recipes nav #publicFirstDiv {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #public_recipes nav #publicSecondDiv {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  #search-bar {
+    margin: auto 0;
+  }
+  
+  #search-bar button {
+    margin: auto 0 !important;
+    border: none !important;
+    background-color: white !important;
+  }
+  
+  #search-bar input {
+    margin: auto 0;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    width: 30em;
+    height: 2em;
+    border-radius: 0.4em;
+    border: 1px solid black;
+  }
+  
+  #public_recipes nav button {
+    margin: 1em;
+  }
+  
+  #search {
+    left: 0;
+  }
+  
+  #banner {
+    width: 100%;
+    height: 16em;
+    background: url('../../public/images/banner.jpeg') no-repeat center center;
+    background-size: cover;
+  }
+  
+  #recipes {
+    width: 100%;
+    overflow: auto;
+    margin-top: 2em;
+    padding: 0 15%;
+    padding-bottom: 1.5em;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1.25em;
+  }
+  
+  #public_recipes #post:hover {
+    background-color: rgba(104, 104, 104, 0.2);
+    cursor: pointer;
+  }

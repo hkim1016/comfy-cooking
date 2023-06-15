@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Halant:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mandali&display=swap');
+
+#view_recipe {
+    font-family: 'Mandali', sans-serif;
+  }
+  
+  #view_grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-gap: 1em;
+  }
+  
+  #pic_title_desc #view_pic {
+    margin: auto;
+  }
+  
+  #pic_title_desc #view_pic img {
+    object-fit: cover;
+    height: 500px;
+    width: 500px;
+    margin: auto;
+  }
+  
+  #pic_title_desc {
+    padding: 1em;
+  }
+  
+  #pic_title_desc #view_picture {
+    background-color: lightgray;
+  }
+  
+  #view_title_desc {
+    margin-top: 2em;
+  }
+  
+  #view_title_desc h2 {
+    margin-bottom: 1em;
+  }
+  
+  #rec_content {
+    padding: 2em;
+    padding-left: 1em;
+  }
+  
+  #view_servings, #view_time {
+    font-family: 'Halant', serif;
+  }
+  
+  #view_ingred_instruct {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-gap: 1em;
+    padding-top: 3em;
+  }
+  
+  #rec_content h5 {
+    font-weight: bold;
+  }
+  
+  #view_ingred h3, #view_instruct h3 {
+    font-weight: bold;
+    font-family: 'Halant', serif;
+  }
+  
+  #view_ingred li, #view_instruct p {
+    font-size: 1.1em;
+  }
+  
+  .instruct_step {
+    margin: 0;
+  }
+  
