@@ -1,6 +1,6 @@
 import {useEffect, useState, React} from 'react';
 import {supabase} from '../supabaseClient';
-import { updateAuthPage } from '../scripts/updateAuthPage';
+import {updateAuthPage} from '../scripts/updateAuthPage';
 import '../style/auth.css';
 
 export default function Auth() {
